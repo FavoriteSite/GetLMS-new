@@ -1,0 +1,19 @@
+@function rem($pxValue, $contentPX: 18) {
+  @return #{$pxValue/$contentPX}rem;
+}
+
+@function em($pxValue, $contentPX: 16) {
+  @return #{$pxValue/$contentPX}em;
+}
+
+
+// Отзывчивое свойство в rem
+@function responsivePXinREM($value, $minValue) {
+  $fontSize: 18;
+  $difference: $value - $minValue;
+
+  $minValueRem: #{$minValue/$fontSize}rem;
+
+  $minValuePX: #{320/$fontSize}rem;
+  @return calc(($minValueRem) + ($difference) * ((100vw - $minValuePX) / (1440 - 320)));
+}

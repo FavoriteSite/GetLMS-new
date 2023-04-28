@@ -1,0 +1,97 @@
+.footer {
+  background: #243A75;
+  border-top: 1px solid #3F5181;
+
+  &__container {}
+
+  &__content {
+    padding: rem(44) rem(0);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__body {
+    margin-right: rem(50);
+    max-width: rem(282);
+  }
+
+  &__logo {
+    width: rem(199);
+    min-height: rem(53);
+    margin-bottom: rem(10);
+  }
+
+  &__slogan {
+    font-family: "Nunito-SemiBold";
+    font-weight: 600;
+    font-size: rem(18);
+    line-height: 139%;
+    color: #E9EBF1;
+    margin-bottom: rem(20);
+  }
+
+  &__social-links {
+    display: flex;
+  }
+
+  &__social-link {
+    &:not(:last-child) {
+      margin-right: rem(20);
+    }
+
+    img {
+      width: rem(30);
+      height: rem(30);
+    }
+  }
+
+  &__items {
+    flex: 0 1 rem(749);
+    display: flex;
+    justify-content: space-between;
+    padding-top: rem(10);
+  }
+
+  &__item {
+    &:not(:last-child) {
+      margin-right: rem(20);
+    }
+  }
+
+  &__item-one {
+    flex: 0 1 rem(178);
+  }
+
+  &__item-two {
+    flex: 0 1 rem(243);
+  }
+
+  &__item-three {
+    flex: 0 1 rem(148);
+  }
+
+  &__item-title {
+    font-family: "Nunito-Bold";
+    font-weight: 700;
+    font-size: rem(22);
+    line-height: 136%;
+    color: #FFFFFF;
+    margin-bottom: rem(20);
+    white-space: nowrap;
+  }
+
+  &__link {
+    display: block;
+    font-size: rem(16);
+    line-height: 156%;
+    color: #E9EBF1;
+    position: relative;
+    width: 100%;
+    padding-bottom: rem(5);
+
+    &:not(:last-child) {
+      margin-bottom: rem(12);
+    }
+  }
+}
