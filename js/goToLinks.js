@@ -85,7 +85,7 @@ function menuLinkGoTo(e) {
     const blockActive = document.querySelector(linkActive.dataset.goto); //блок, на который ссылается нажатая ссылка
     const blockActiveValue = blockActive.getBoundingClientRect().top + window.pageYOffset; //высота блока
 
- 
+
     closeMenu(); //закрытие меню
 
     activeFocusInActiveBlock(blockActive);//focus в блоке, на который перешли
