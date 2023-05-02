@@ -37,9 +37,7 @@
     }
   }
 
-  &__item {
-  
-  }
+  &__item {}
 
   &__link {
     font-size: rem(18);
@@ -69,22 +67,12 @@
     color: #163560;
     background-color: transparent;
     border: 1px solid rgba(239, 126, 41, 1);
-
-    &:focus-visible {
-      outline: 1px solid #163560;
-      border: 1px solid transparent;
-    }
-
   }
 
   &__demo-version {
     flex: 0 1 rem(165);
     color: #FFFFFF;
     background: linear-gradient(90deg, #EF7E29 1.84%, #F9B146 100%);
-
-    &:focus-visible {
-      outline: 1px solid #163560;
-    }
   }
 }
 

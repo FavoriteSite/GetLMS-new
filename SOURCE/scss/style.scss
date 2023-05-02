@@ -16,6 +16,10 @@ body {
   line-height: 1;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .wrapper {
   min-height: 100%;
   overflow: hidden;
@@ -50,6 +54,14 @@ body {
 body._hidden {
   overflow: hidden;
 }
+
+.focus-visible {
+  &:focus-visible {
+    outline: rem(3) dashed #699DEE;
+    outline-offset: rem(3);
+  }
+}
+
 
 @import "header";
 @import "page";

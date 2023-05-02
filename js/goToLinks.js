@@ -5,7 +5,7 @@ let linkAriaLabel = document.querySelectorAll('[data-label]'); // все эле�
 let buttonBurger = document.querySelector('.icon-menu'); //копка бургер
 let buttonBurgerStyle = getComputedStyle(buttonBurger);  //стили кнопки бургер
 let buttonBurgerStyleDisplay = buttonBurgerStyle.display;  //значение сво-ва display
-const menuLinks = document.querySelectorAll('.menu__link[data-goto]'); //ссылки для перехода к разделам сайта
+const menuLinks = document.querySelectorAll('.header__link[data-goto]'); //ссылки для перехода к разделам сайта data-goto=".opportunities"
 if (menuLinks) {
   for (let menuLink of menuLinks) {
     menuLink.addEventListener('click', menuLinkGoTo);
@@ -78,33 +78,51 @@ buttonBurger.addEventListener('click', function (e) {
 });
 
 
-
 function menuLinkGoTo(e) {
   const linkActive = e.target; //ссылка, на которую нажали
   if (linkActive.dataset.goto && document.querySelector(linkActive.dataset.goto)) { //есть ли атрибут && есть, то на что ссылается
     const blockActive = document.querySelector(linkActive.dataset.goto); //блок, на который ссылается нажатая ссылка
     const blockActiveValue = blockActive.getBoundingClientRect().top + window.pageYOffset; //высота блока
 
+    //если моб версия, то закрываем меню
+    if (menuMobile.classList.contains('_show-menu')) {
+      closeMenu(); //закрытие меню
+    }
 
-    closeMenu(); //закрытие меню
 
-    activeFocusInActiveBlock(blockActive);//focus в блоке, на который перешли
-
+    //плавно перешли к актиному блоку
     window.scrollTo({
       top: blockActiveValue,
       behavior: "smooth"
     });
 
+    //задержка для плавного перехода, а затем фокусировки
+    // setTimeout(activeFocusInActiveBlock, 1000, blockActive);
+    activeFocusInActiveBlock(blockActive);
+
+
     e.preventDefault();
   }
 }
 
+
 function activeFocusInActiveBlock(blockActive) {
   //в блоке, на который нужно перейти получает все возможные теги
-  let activeElements = blockActive.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])',);
+  let activeElements = blockActive.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])');
+  //получаем все возможные теги на всем сайте
+  let activeElementsDocument = document.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])');
   let firstElementActiveBlock = activeElements[0];   //в активном блоке получаем первый элемент для фокуса
-  if (firstElementActiveBlock) {// если в блоке есть фокусируемый элемент, то работаем
-    firstElementActiveBlock.focus();
+
+
+  let counter = 0; //счетчик
+  for (let i of activeElementsDocument) {
+
+    if (i == firstElementActiveBlock) { //если один из элементов на сайте равен первому элементу в актвном блоке 
+      activeElementsDocument[counter - 1].focus({ preventScroll: true }); //делаем фокус предыдущему элементу по счетчику
+      break; //заканчиваем перебирать цикл
+    }
+
+    counter += 1; //счетчик после условия
   }
 }
 
@@ -124,4 +142,10 @@ function closeMenu() {
   addAriaHidden(); //прячем опять фокус и nvda
 }
 
-
+// document.addEventListener('keydown', function (e) {
+//   if (e.key == 9) {
+//     console.log('333');
+// free.classList.add('_focus-visible');
+//     // firstElementActiveBlock.classList.toggle('_active');
+//   }
+// });

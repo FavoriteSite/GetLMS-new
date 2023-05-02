@@ -52,10 +52,6 @@
     background: linear-gradient(90deg, #EF7E29 1.84%, #F9B146 100%);
     border-radius: rem(15);
 
-    &:focus-visible {
-      outline: 2px solid #163560;
-    }
-
     &:not(:last-child) {
       margin-bottom: rem(20);
     }
@@ -391,6 +387,11 @@
     &:not(:last-child) {
       margin-bottom: rem(10);
     }
+
+    &:focus-visible{
+      outline: rem(3) dashed #fff;
+      outline-offset: rem(3);
+    }
   }
 
   &__img {
@@ -570,6 +571,7 @@
     text-align: center;
     transition: box-shadow 0.5s ease 0s;
 
+
     span {
       position: relative;
       color: #FFFFFF;
@@ -585,6 +587,11 @@
         width: rem(24);
         height: rem(24);
       }
+    }
+
+    &:focus-visible {
+      outline: 2px dashed #699DEE;
+      outline-offset: 3px;
     }
 
   }
@@ -644,7 +651,6 @@
 }
 
 .before-blue {
-
   &::before {
     background: #163560;
   }
@@ -728,6 +734,11 @@
 
     &:not(:last-child) {
       margin-bottom: rem(20);
+    }
+
+    &:focus-visible{
+      outline: rem(3) dashed #fff;
+      outline-offset: rem(3);
     }
   }
 

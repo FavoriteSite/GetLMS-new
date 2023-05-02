@@ -36,6 +36,11 @@
   }
 
   &__social-link {
+    
+    &:focus-visible {
+      outline: rem(3) dashed #EF7E29;
+      outline-offset: rem(3);
+    }
     &:not(:last-child) {
       margin-right: rem(20);
     }
@@ -89,6 +94,11 @@
     position: relative;
     width: 100%;
     padding-bottom: rem(5);
+
+    &:focus-visible {
+      outline: rem(3) dashed #EF7E29;
+      outline-offset: rem(3);
+    }
 
     &:not(:last-child) {
       margin-bottom: rem(12);
