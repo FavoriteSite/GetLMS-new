@@ -1,1 +1,73 @@
-const mainForm = document.forms.main, focus = document.querySelectorAll(".form__input[data-focus]"); if (focus.length > 0) for (let e = 0; e < focus.length; e++) { const t = focus[e], n = t.placeholder; t.addEventListener("focus", (function (e) { t.placeholder = "" })), t.addEventListener("blur", (function (e) { t.placeholder = n })) } const inputName = mainForm.name, inputPhone = mainForm.phone, inputEmail = mainForm.email, inputTextarea = mainForm.comment; let testEmail = /[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}/i, testPhone = /[0-9]/; mainForm.addEventListener("submit", (function (e) { e.preventDefault(); let t = inputName.value, n = inputPhone.value, a = inputEmail.value; ("" == t || t.length <= 2) && (inputName.value = "Ошибка", inputName.classList.add("_error")), (!testPhone.test(n) || n.length <= 6) && (inputPhone.value = "Ошибка", inputPhone.classList.add("_error")), testEmail.test(a) || (inputEmail.value = "Ошибка", inputEmail.classList.add("_error")); const o = document.querySelectorAll("[data-focus]"); if (o.length > 0) for (let e = 0; e < o.length; e++) { const t = o[e]; t.classList.contains("_error") && (t.addEventListener("click", i), t.addEventListener("keyup", l)) } function i(e) { const t = e.target; t.classList.remove("_error"), "Ошибка" == t.value && (t.value = "") } function l(e) { const t = e.target; (9 == e.which || e.shiftKey) && (t.classList.remove("_error"), "Ошибка" == t.value && (t.value = "")) } }));
+
+//form
+const mainForm = document.forms.main;
+
+const focus = document.querySelectorAll('.form__input[data-focus]');
+if (focus.length > 0) {
+  for (let i = 0; i < focus.length; i++) {
+    const inputNum = focus[i];
+    const inputPlasceholder = inputNum.placeholder;
+    inputNum.addEventListener('focus', function (e) {
+      inputNum.placeholder = "";
+    });
+    inputNum.addEventListener('blur', function (e) {
+      inputNum.placeholder = inputPlasceholder;
+    });
+  };
+}
+
+const inputName = mainForm.name;
+const inputPhone = mainForm.phone;
+const inputEmail = mainForm.email;
+const inputTextarea = mainForm.comment;
+let testEmail = /[0-9a-z_-]+@[0-9a-z_-]+\.[a-z]{2,5}/i;
+let testPhone = /[0-9]/;
+mainForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+  let inputNameValue = inputName.value;
+  let inputPhoneValue = inputPhone.value;
+  let inputEmailValue = inputEmail.value;
+
+  if (inputNameValue == "" || inputNameValue.length <= 2) {
+    inputName.value = "Ошибка";
+    inputName.classList.add('_error');
+  }
+  if (!testPhone.test(inputPhoneValue) || inputPhoneValue.length <= 6) {
+    inputPhone.value = "Ошибка";
+    inputPhone.classList.add('_error');
+  }
+  if (!testEmail.test(inputEmailValue)) {
+    inputEmail.value = "Ошибка";
+    inputEmail.classList.add('_error');
+  }
+
+  const inputs = document.querySelectorAll('[data-focus]');
+  if (inputs.length > 0) {
+    for (let i = 0; i < inputs.length; i++) {
+      const input = inputs[i];
+      if (input.classList.contains("_error")) {
+        input.addEventListener('click', inputUpdeteClick);
+        input.addEventListener('keyup', inputUpdeteKeyup);
+      }
+    };
+  }
+
+
+  function inputUpdeteClick(e) {
+    const inputItem = e.target;
+    inputItem.classList.remove('_error');
+    if (inputItem.value == "Ошибка") {
+      inputItem.value = "";
+    }
+  }
+
+  function inputUpdeteKeyup(e) {
+    const inputItem = e.target;
+    if (e.which == 9 || e.shiftKey) {
+      inputItem.classList.remove('_error');
+      if (inputItem.value == "Ошибка") {
+        inputItem.value = "";
+      }
+    }
+  }
+});

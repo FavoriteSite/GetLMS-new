@@ -1,1 +1,110 @@
-const spollerTitles = document.querySelectorAll("[data-spoller]"); spollerTitles.length > 0 && spollerTitles.forEach((e => { e.parentElement.classList.contains("_active") || (e.nextElementSibling.hidden = !0), e.addEventListener("click", (function (t) { if (this.parentElement.hasAttribute("data-one-spoller")) if (e.parentElement.classList.contains("_active")) e.parentElement.classList.contains("_active") && (e.parentElement.classList.toggle("_active"), slideToggle(e.nextElementSibling, 500)); else { const t = document.querySelector("[data-one-spoller]._active"); e.parentElement.classList.add("_active"), slideDown(e.nextElementSibling, 500), t && (t.classList.remove("_active"), slideUp(t.lastElementChild, 500)) } else e.parentElement.classList.toggle("_active"), slideToggle(e.nextElementSibling, 500) })) })); let slideUp = (e, t = 500) => { e.style.transitionProperty = "height, margin, padding", e.style.transitionDuration = t + "ms", e.style.height = e.offsetHeight + "px", e.offsetHeight, e.style.overflow = "hidden", e.style.height = 0, e.style.paddingTop = 0, e.style.paddingBottom = 0, e.style.marginTop = 0, e.style.marginBottom = 0, window.setTimeout((() => { e.style.display = "none", e.style.removeProperty("height"), e.style.removeProperty("padding-top"), e.style.removeProperty("padding-bottom"), e.style.removeProperty("margin-top"), e.style.removeProperty("margin-bottom"), e.style.removeProperty("overflow"), e.style.removeProperty("transition-duration"), e.style.removeProperty("transition-property") }), t) }, slideDown = (e, t = 500) => { e.style.removeProperty("display"); let o = window.getComputedStyle(e).display; "none" === o && (o = "block"), e.style.display = o; let l = e.offsetHeight; e.style.overflow = "hidden", e.style.height = 0, e.style.paddingTop = 0, e.style.paddingBottom = 0, e.style.marginTop = 0, e.style.marginBottom = 0, e.offsetHeight, e.style.transitionProperty = "height, margin, padding", e.style.transitionDuration = t + "ms", e.style.height = l + "px", e.style.removeProperty("padding-top"), e.style.removeProperty("padding-bottom"), e.style.removeProperty("margin-top"), e.style.removeProperty("margin-bottom"), window.setTimeout((() => { e.style.removeProperty("height"), e.style.removeProperty("overflow"), e.style.removeProperty("transition-duration"), e.style.removeProperty("transition-property") }), t) }, slideToggle = (e, t = 500) => "none" === window.getComputedStyle(e).display ? slideDown(e, t) : slideUp(e, t);
+// spoller
+
+// Если у родителя есть атрибут data-one-spoller, то выполнится это условие и работает аккардион
+// если удалить этот атрибут в html будет спойллер
+const spollerTitles = document.querySelectorAll('[data-spoller]');
+
+if (spollerTitles.length > 0) {
+
+  spollerTitles.forEach(spollerTitle => {
+
+    // показан текст у обекта с классом _active иначе скрыт
+    if (!spollerTitle.parentElement.classList.contains('_active')) {
+      spollerTitle.nextElementSibling.hidden = true;
+    }
+    spollerTitle.addEventListener('click', function (e) {
+
+      // проверка на атрибут для работы аккардиона
+      if (this.parentElement.hasAttribute('data-one-spoller')) {
+
+        // если у нажатой кнопки нет класса актив, то все остальные спойлеры скрыть
+        if (!spollerTitle.parentElement.classList.contains('_active')) {
+
+          // получаем активный открытый спойллер
+          const titleActive = document.querySelector('[data-one-spoller]._active');
+
+          spollerTitle.parentElement.classList.add('_active');
+          slideDown(spollerTitle.nextElementSibling, 500);
+          if (titleActive) {
+            titleActive.classList.remove('_active');
+            slideUp(titleActive.lastElementChild, 500);
+          }
+        }
+        // закрытие активного аккардиона.Кому нужно? (4 строчки - можно удалить)
+        else if (spollerTitle.parentElement.classList.contains('_active')) {
+          spollerTitle.parentElement.classList.toggle('_active');
+          slideToggle(spollerTitle.nextElementSibling, 500);
+        }
+      } else {
+        spollerTitle.parentElement.classList.toggle('_active');
+        slideToggle(spollerTitle.nextElementSibling, 500);
+      }
+    })
+  });
+}
+
+
+// скрывает объект
+let slideUp = (target, duration = 500) => {
+  target.style.transitionProperty = 'height, margin, padding';
+  target.style.transitionDuration = duration + 'ms';
+  target.style.height = target.offsetHeight + 'px';
+  target.offsetHeight;
+  target.style.overflow = 'hidden';
+  target.style.height = 0;
+  target.style.paddingTop = 0;
+  target.style.paddingBottom = 0;
+  target.style.marginTop = 0;
+  target.style.marginBottom = 0;
+  window.setTimeout(() => {
+    target.style.display = 'none';
+    target.style.removeProperty('height');
+    target.style.removeProperty('padding-top');
+    target.style.removeProperty('padding-bottom');
+    target.style.removeProperty('margin-top');
+    target.style.removeProperty('margin-bottom');
+    target.style.removeProperty('overflow');
+    target.style.removeProperty('transition-duration');
+    target.style.removeProperty('transition-property');
+  }, duration);
+}
+
+//функция показывает обект
+let slideDown = (target, duration = 500) => {
+  target.style.removeProperty('display');
+  let display = window.getComputedStyle(target).display;
+  if (display === 'none')
+    display = 'block';
+  target.style.display = display;
+  let height = target.offsetHeight;
+  target.style.overflow = 'hidden';
+  target.style.height = 0;
+  target.style.paddingTop = 0;
+  target.style.paddingBottom = 0;
+  target.style.marginTop = 0;
+  target.style.marginBottom = 0;
+  target.offsetHeight;
+  target.style.transitionProperty = "height, margin, padding";
+  target.style.transitionDuration = duration + 'ms';
+  target.style.height = height + 'px';
+  target.style.removeProperty('padding-top');
+  target.style.removeProperty('padding-bottom'); z
+  target.style.removeProperty('margin-top');
+  target.style.removeProperty('margin-bottom');
+  window.setTimeout(() => {
+    target.style.removeProperty('height');
+    target.style.removeProperty('overflow');
+    target.style.removeProperty('transition-duration');
+    target.style.removeProperty('transition-property');
+  }, duration);
+}
+
+
+let slideToggle = (target, duration = 500) => {
+  if (window.getComputedStyle(target).display === 'none') {
+    return slideDown(target, duration); //показать 
+  } else {
+    return slideUp(target, duration); //скрыть 
+  }
+}
+
